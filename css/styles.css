@@ -260,7 +260,7 @@ h6 {
         z-index: 999;
     }
 
-    .logo.nav-open span {
+    body.nav-open .logo span {
         color: var(--color-black);
     }
 
@@ -291,7 +291,12 @@ h6 {
         left: 0;
     }
 
-    nav .nav-list {
+    .nav.nav-open > div {
+        width: 100%;
+        height: 100%;
+    }
+
+    .nav .nav-list {
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
@@ -509,7 +514,7 @@ h6 {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 790px) {
     .how-it-works {
         padding: 56px 0;
     }
@@ -599,6 +604,8 @@ h6 {
 }
 
 .reviews-slider {
+    position: relative;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -614,10 +621,15 @@ h6 {
     border-radius: 8px;
     box-shadow: 0px 5px 24px 0px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.2s ease;
+    user-select: none;
 }
 
 .slider-item.visible {
     display: block;
+}
+
+.slider-item.hidden {
+    display: none;
 }
 
 .slider-item:hover {
@@ -666,18 +678,26 @@ h6 {
 .slider-button {
     position: absolute;
     height: 100%;
+    width: 32px;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    background-position: center center;
     top: 0;
 }
 
 .slider-button.prev {
     left: 0;
-    top: -30px;
+    background-image: url('../images/how-it-works/icon-arrow.svg');
 }
 
 .slider-button.next {
     right: 0;
-    top: -30px;
     transform: rotate(180deg);
+    background-image: url('../images/how-it-works/icon-arrow.svg');
+}
+
+.slider-button[disabled] {
+    background-image: url('../images/how-it-works/icon-arrow-disabled.svg');
 }
 
 .slider-button path {
@@ -708,10 +728,23 @@ h6 {
     background-color: var(--color-primary);
 }
 
+@media (max-width: 1279px) {
+    .reviews-slider {
+        max-width: 860px;
+    }
+}
+
 @media (max-width: 870px) {
     .slider-button.prev,
     .slider-button.next {
         display: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .reviews-title h2 {
+      font-size: 24px;
+      line-height: 1.33;
     }
 }
 
@@ -724,7 +757,7 @@ h6 {
     color: var(--color-black);
 }
 
-/* ------------ NEW ACCORDEON ------------ */
+/* ------------ ACCORDEON START ------------ */
 .accordion-wrapper {
     max-width: 1008px;
     margin: 40px auto;
@@ -735,6 +768,7 @@ h6 {
   flex-direction: column;
   overflow: hidden;
   transition: color 0.2s ease;
+  text-align: left;
 }
 
 .accordion .accordion-header {
@@ -771,7 +805,7 @@ h6 {
   border: 2px solid var(--color-black);
   border-radius: 50%;
   color: var(--color-black);
-  transition: border 0.2s ease;
+  transition: border 0.2s ease, transform 0.2s ease;
 }
 
 .accordion-icon::after {
@@ -803,13 +837,28 @@ h6 {
     max-height: 100%;
     margin-top: 24px;
 }
-/* -------------NEW ACCORDEON----------- */
+
+.accordion-expand .accordion-icon {
+  transform: rotate(45deg);
+}
+/* ------------- ACCORDEON END ----------- */
 
 @media (max-width: 960px) {
     .accordion-expand .accordion-body,
     .accordion .accordion-header h4 {
         max-width: calc(100% - 52px);
     }
+}
+
+@media (max-width: 420px) {
+  .faq-title {
+    margin-top: 56px;
+  }
+
+  .faq-title h2 {
+    font-size: 24px;
+    line-height: 1.33;
+  }
 }
 
 /* FAQ END */
@@ -869,6 +918,19 @@ h6 {
 
 .form {
     padding: 80px 0;
+}
+
+.form-sended {
+    margin: 0 auto;
+    text-align: center;
+    max-width: fit-content;
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--color-white);
+    border: 1px solid var(--color-green);
+    background-color: var(--color-green);
+    border-radius: 4px;
+    padding: 15px;
 }
 
 .form-wrapper {
@@ -937,6 +999,16 @@ h6 {
     border: 2px solid var(--color-mid-gray);
     border-radius: 4px;
     padding: 28px 16px 4px 16px;
+}
+
+.floating-input input.invalid {
+    border: 2px solid var(--color-red);
+    background-color: var(--color-white);
+}
+
+.floating-input input.completed {
+    border: 2px solid var(--color-light-gray);
+    background-color: var(--color-white);
 }
 
 .floating-input input:not([placeholder=" "])::placeholder {
@@ -1068,11 +1140,15 @@ h6 {
 
     .form .input-wrapper {
         flex-direction: column;
-        gap: 20px;
+        gap: 35px;
     }
 
     .form-wrapper {
         gap: 20px;
+    }
+
+    .checkbox-wrapper {
+        margin-top: 15px;
     }
 }
 
